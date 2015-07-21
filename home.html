@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app="ROIClientApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Marketing Channel Mix Optimizer</title>
+    <!--Local css dependencies-->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/font-awsome/css/font-awesome.min.css">
+    <!--css dependencies cdn-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!--Local css-->
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body ng-controller="indexCtrl">
+<!--nav bar-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+
+
+            <span class="logo_ROI">Marketing Channel Mix Optimizer </span>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button type="button" class="btn navbar-btn btn-sm btn-default btn-nav-roi"><i
+                            class="fa  fa-user-md"></i> Help
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn navbar-btn btn-sm btn-default btn-nav-roi"><i
+                            class="fa  fa-power-off"></i> Logout
+                    </button>
+                </li>
+                <br/>
+                <li>
+                    <div class="log-info-text-setting"><i class="font-turn-red">Welcome, {{users[0].name}} </i> |
+                        <small>{{users[0].recentlyLoginRecord}}</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--    side menu + content  -   -->
+<div class="container-fluid" id="page-header-margin-top">
+
+    <div class="row">
+
+        <div class="sidebar" ng-class="menuState.cssLeft">
+
+
+            <ul class="nav nav-sidebar">
+                <i>
+                    <a id="toggle-menu" class="toggle-btn icon-goright" ng-click="toggleMenu();"><i
+                            ng-class="menuState.iconInfo"></i></a>
+                </i>
+
+                <br/>
+                <br/>
+
+                <li class="sidebar-li-margin"><a class="sidebar-a" href="#lookback"><span ng-show="menuState.show">Look Back</span><img
+                        class="icon-goright" src="img/look.png" width="25" height="25" alt=""/></a></li>
+                <li class="sidebar-li-margin"><a class="sidebar-a" href="#planforward"><span ng-show="menuState.show">Plan Forward</span><img
+                        class="icon-goright" src="img/plan.png" width="25" height="25" alt=""/></a></li>
+
+                <li class="sidebar-li-margin"><a class="sidebar-a" href="#myscenarios"><span ng-show="menuState.show">My Scenarios</span><img
+                        class="icon-goright" src="img/my.png" width="25" height="25" alt=""/></a></li>
+
+            </ul>
+
+        </div>
+        <div class="container-fluid" ng-class="menuState.cssRight">
+            <div ng-view></div>
+        </div>
+    </div>
+</div>
+<!--Local js Components-->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="bower_components/d3/d3.min.js"></script>
+<!--end local js components-->
+
+<!--cdn js Components-->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-sanitize.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.0/ui-bootstrap-tpls.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<!--end cdn js Components-->
+
+
+<script src="scripts/lookBackPageModule.js"></script>
+<script src="scripts/planForwardPageModule.js"></script>
+<script src="scripts/compareChart.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/myScenarios.js"></script>
+
+</body>
+</html>

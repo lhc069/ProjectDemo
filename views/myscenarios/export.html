@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <!--nav bar-->
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#dashBoard">Home</a></li>
+            <li><a href="#myscenarios">My Scenarios</a></li>
+            <li>Export</li>
+        </ol>
+    </div>
+    <!--end nav bar-->
+    <!--form-->
+    <form class="form-horizontal">
+        <!--Scenario id-->
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-2 control-label">Scenario ID:</label>
+
+            <div class="col-xs-11 col-sm-4">
+                <div class="well well-sm">
+                    May2015-LTA-X-O-001-R1
+                </div>
+            </div>
+        </div>
+        <!--Scenario name-->
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-2 control-label">Scenario Name:</label>
+
+            <div class="col-xs-11 col-sm-4">
+                <div class="well well-sm">
+                    May 2015 Optimized
+                </div>
+            </div>
+        </div>
+        <!--Scenario notes-->
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-2 control-label">Notes about the scenario:</label>
+
+            <div class="col-xs-11 col-sm-4">
+                <div class="well well-sm">
+                    This is the first scenario with Spend and no constraints and using LTA as attribution method
+                </div>
+            </div>
+        </div>
+        <!--input file name-->
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-2 control-label">File Name:</label>
+
+            <div class="col-xs-11 col-sm-4">
+                <input class="form-control">
+            </div>
+            <div class="col-xs-1 elp-info">
+                <i class="fa fa-question-circle" tooltip-placement="left" tooltip="tooltip"></i>
+            </div>
+        </div>
+        <!--select file type-->
+        <div class="form-group">
+            <label class="col-xs-12 col-sm-2 control-label">File Type:</label>
+
+            <div class="col-xs-11 col-sm-4">
+                <select id="lookBackBrand" class="form-control">
+                    <option>Excel</option>
+                </select>
+            </div>
+            <div class="col-xs-1 elp-info">
+                <i class="fa fa-question-circle" tooltip-placement="left" tooltip="tooltip"></i>
+            </div>
+        </div>
+        <!--button export and cancel-->
+        <div class="form-group">
+            <div class="col-xs-6 col-xs-offset-0 col-sm-2 col-sm-offset-2">
+                <button type="button" class="btn btn-default">Export</button>
+            </div>
+            <div class="col-xs-6 col-sm-2">
+                <a href="#myscenarios"><button type="button" class="btn btn-default">Cancel</button></a>
+            </div>
+        </div>
+    </form>
+    <!--end of form-->
+</div>

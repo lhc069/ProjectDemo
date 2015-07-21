@@ -1,0 +1,455 @@
+/*************************************************
+ *************************************************
+ *******                            **************
+ *************************************************
+ *************************************************
+ *******                            **************
+ *************************************************
+ *************************************************
+ *******                            **************
+ *************************************************
+ *************************************************
+ *******                            **************
+ *************************************************
+ *************************************************
+ *******                            **************
+ *************************************************
+ *************************************************/
+body {
+    background-color: #f8f8f8;
+    font-size: 13px;
+}
+
+option {
+    padding: 0;
+}
+
+input {
+    padding: 0;
+}
+
+label {
+    padding-top: 0px;
+}
+
+table {
+    vertical-align: middle;
+    margin-top: 20px;
+    padding:0;
+}
+
+th {
+    text-align: center;
+}
+
+.table-fix-width{
+    table-layout: fixed;
+    text-align: center;
+}
+.tr-fix-width-label{
+    width:100px;
+}
+.tr-fix-width-numx2{
+    width: 200px;
+    text-align: center;
+}
+.tr-fix-width-numx4{
+    width: 400px;
+    text-align: center;
+}
+.tr-text-mid{
+    text-align: center;
+}
+
+.td-fix-width-num{
+    text-align: right;
+}
+
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+
+
+.breadcrumb a {
+    color: #3c3c3c;
+}
+
+.breadcrumb a:hover {
+    color: rgb(240, 83, 35);
+    -webkit-transition: height 0.5s, opacity 0.5s, -webkit-transform 0.5s;
+    -moz-transition: height 0.5s, opacity 0.5s, -moz-transform 0.5s;
+    -o-transition: height 0.5s, opacity 0.5s, -o-transform 0.5s;
+    transition: height 0.5s, opacity 0.5s, transform 0.5s;
+    -webkit-transform: translateY(-1px);
+    -moz-transform: translateY(-1px);
+    -o-transform: translateY(-1px);
+    transform: translateY(-1px);
+}
+
+/*      -----------------nav element setting ------------------*/
+.breadcrumb {
+    margin: 0px 0px 10px 10px;
+    border-bottom: 1px solid #727272;
+}
+
+.logo_ROI {
+    margin: 20px 20px 20px 20px;
+    font-size: 28px;
+    float: left;
+    color: white;
+    text-shadow: 1px 1px 3px #000000;
+}
+
+.logo_s {
+    width: 230px;
+    height: 44px;
+    margin: 0px 0px 0px 0px;
+    border-radius: 5px;
+    /*box-shadow: 5px 5px 10px grey;*/
+}
+
+/*      --------------end--- -nav element setting ------------------*/
+.empty-container-left {
+    height: 40px;
+}
+
+/*      -----------------page-header ------------------*/
+#page-header-margin-top {
+    margin-top: 100px;
+}
+
+.sidebar {
+    width: 190px;
+    padding-top: 20px;
+    position: fixed;
+    height: 88%;
+    font-size: 16px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 0 10px 0 0;
+    box-shadow: 2px 2px 10px grey;
+    transition: width 2s;
+    -moz-transition: width .5s; /* Firefox 4 */
+    -webkit-transition: width .5s; /* Safari and Chrome */
+    -o-transition: width .5s; /* Opera */
+}
+
+.sidebar-before-left {
+
+}
+
+.sidebar-before-right {
+    padding-left: 200px;
+    transition: padding-left .5s;
+    -moz-transition: padding-left .5s; /* Firefox 4 */
+    -webkit-transition: padding-left .5s; /* Safari and Chrome */
+    -o-transition: padding-left .5s; /* Opera */
+}
+
+.sidebar-after-right {
+    padding-left: 70px;
+    transition: padding-left .5s;
+    -moz-transition: padding-left .5s; /* Firefox 4 */
+    -webkit-transition: padding-left .5s; /* Safari and Chrome */
+    -o-transition: padding-left .5s; /* Opera */
+}
+
+.sidebar-after-left {
+    width: 60px;
+    transition: width .5s;
+    -moz-transition: width .5s; /* Firefox 4 */
+    -webkit-transition: width .5s; /* Safari and Chrome */
+    -o-transition: width .5s; /* Opera */
+}
+
+#page-header-title {
+    margin: 20px 20px 20px 20px;
+}
+
+#page-show-border {
+    border: 1px solid #727272;
+}
+
+.log-info-text-setting {
+    padding-right: 40px;
+}
+
+/*      ------------end-----page-header ------------------*/
+
+/*      -----------------font style ------------------*/
+.font-turn-red {
+    color: rgb(240, 83, 35);
+}
+
+/*      -----------end------font style ------------------*/
+/*      -----------------btn ------------------*/
+.btn-orange {
+    margin: 5px 10px 5px 10px;
+    text-transform: uppercase;
+    background-color: rgb(240, 83, 35);
+    color: #f8f8f8;
+    box-shadow: 2px 2px 2px rgb(240, 83, 35);
+}
+
+.btn-orange:hover {
+    background-color: #f8f8f8;
+    color: rgb(240, 83, 35);
+    border: 1px solid rgb(240, 83, 35);
+    position: relative;
+    top: 1px;
+    left: 1px;
+    -webkit-transform: translateY(2px);
+    -moz-transform: translateY(2px);
+    -o-transform: translateY(2px);
+    transform: translateY(2px);
+    -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+    -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+    -o-transition: -o-transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
+    font-weight: 700;
+}
+
+.btn-orange:active {
+    box-shadow: 2px 2px 2px rgb(240, 83, 35);
+    position: relative;
+    top: 2px;
+    font-weight: 700;
+}
+
+.btn-nav-roi {
+    margin: 10px 6px 10px 6px;
+    padding: 6px 30px 6px 30px;
+    text-transform: uppercase;
+    color: #727272;
+}
+
+.btn-nav-roi:hover {
+    font-weight: 700;
+    background-color: #f8f8f8;
+    position: relative;
+    top: 1px;
+    left: 1px;
+    -webkit-transform: translateY(2px);
+    -moz-transform: translateY(2px);
+    -o-transform: translateY(2px);
+    transform: translateY(2px);
+    -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+    -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+    -o-transition: -o-transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
+    color: rgb(240, 83, 35);
+    content: attr(data-hover);
+
+}
+
+.btn-nav-roi:active {
+    font-weight: 700;
+    position: relative;
+    top: 2px;
+}
+
+/*      ---------end--------btn ------------------*/
+/*      -----------------conponent  setting------------------*/
+.dashboard-p {
+    padding: 0 0 0 0;
+}
+
+.content {
+    margin-top: 40px;
+}
+
+.nav-sidebar li a {
+    color: #3c3c3c;
+    text-transform: capitalize;
+    margin-right: 5px;
+
+}
+
+.nav-sidebar li:hover a {
+    color: rgb(240, 83, 35);
+    border-left: 3px solid rgb(240, 83, 35);
+    -webkit-transform: translateX(3px);
+    -moz-transform: translateX(3px);
+    -o-transform: translateX(3px);
+    transform: translateX(3px);
+    -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+    -moz-transition: -moz-transform 0.5s, opacity 0.5s;
+    -o-transition: -moz-transform 0.5s, opacity 0.5s;
+    transition: transform 0.5s, opacity 0.5s;
+    font-weight: 700;
+}
+
+.nav-sidebar li:active a {
+    color: rgb(240, 83, 35);
+    position: relative;
+    top: 2px;
+    font-weight: 700;
+}
+
+#toggle-menu {
+    margin-right: 22px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: rgb(240, 83, 35);
+}
+
+.video-title {
+    margin-top: 0px;
+}
+
+.video-info-setting {
+    width: 90%;
+
+}
+
+.video {
+    height: 300px;
+    margin-top: 0px;
+    border-radius: 7px;
+}
+
+.dashboard-img {
+    width: 116px;
+    height: 116px;
+}
+
+.height_bar {
+    height: 83px;
+}
+
+.content {
+    margin-bottom: 20px;
+}
+
+.icon-goright {
+    float: right;
+
+}
+
+.sidebar-li-margin {
+    margin: 15px 0px 15px 0px;
+    padding: 0;
+}
+
+.toggle-btn {
+    margin-right: 25px;
+}
+
+.sidebar-a {
+    padding-top: 0px;
+    height: 50px;
+}
+
+.well {
+    padding: 7px 0 7px 10px;
+    margin: 0;
+}
+
+.well label {
+    padding: 0 0 0 10px;
+}
+
+.well strong {
+    padding: 0 0 0 10px;
+}
+
+.elp-info .fa {
+    font-size: 25px;
+    padding-top: 5px;
+}
+
+/*      ---------end--------conponent  setting------------------*/
+
+/*        ---------------Login part --------------------------*/
+
+.login-logo {
+    margin-bottom: 100px;
+    background-color: #f8f8f8;
+}
+
+#login {
+    background-color: #f8f8f8;
+    opacity: .9;
+    height: 280px;
+    width: 400px;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 0;
+    text-align: center;
+}
+
+#login h1 {
+    border-radius: 5px  5px  5px  5px;
+    font-size: 32px;
+    padding: 10px;
+    margin: 0;
+    color: #fff;
+    background-color: rgb(240, 83, 35);
+    margin-bottom: 15px;
+}
+
+#login input[type="text"], #login input[type="password"] {
+    width: 280px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid rgb(240, 83, 35);
+    margin-bottom: 15px;
+    text-align: center;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+    font-family: 'Open Sans', 'sans-serif';
+
+}
+
+#login input[type="text"]:focus, #login input[type="password"]:focus {
+    color: #727272;
+    width: 310px;
+    border: 1px solid rgb(240, 83, 35);
+    outline: none;
+}
+
+#login .login-checkbox{
+    text-align: left;
+    padding-left: 10%;
+
+}
+#login .login-forget{
+    text-align: right;
+    padding-right: 10%;
+}
+#login input[type="submit"]{
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(240, 83, 35);
+    border: 1px solid rgb(240, 83, 35);
+    padding: 10px;
+    margin:5px;
+    width: 45%;
+    display: inline-block;
+    position: relative;
+    outline: none;
+    border-radius: 5px;
+}
+
+#login input[type="submit"]:hover{
+    color: rgb(240, 83, 35);
+    background-color:#f8f8f8;
+    border: 1px solid rgb(240, 83, 35);
+    box-sizing: border-box;
+
+
+}
+#login input[type="submit"]:active{
+    box-shadow: 0 1px 0 0 rgb(240, 83, 35);
+    -webkit-transform: translate(0, 3px);
+    -moz-transform: translate(0, 3px);
+    -o-transform: translate(0, 3px);
+    transform: translate(0, 3px);
+}
+
+/*        ---------end------Login part --------------------------*/

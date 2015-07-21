@@ -1,0 +1,55 @@
+<style>
+    .active-row >td{
+        background-color: orangered;
+        color: #ffffff;
+    }
+</style>
+<div class="container-fluid">
+    <!--nav bar-->
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#dashBoard">Home</a></li>
+            <li>My Scenarios</a></li>
+        </ol>
+    </div>
+    <!--end nav bar-->
+    <!--table view-->
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Create Date</th>
+                    <th>Begin Month</th>
+                    <th>End Month</th>
+                    <th>AM</th>
+                    <th>Planned Spend</th>
+                    <th>Revenue</th>
+                    <th>ROI</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-click="slecteRow(scenario)" ng-repeat="scenario in scenarios"
+                    ng-class="{'active-row':scenario.isActive}">
+                    <td>{{scenario.id}}</td>
+                    <td>{{scenario.createDate}}</td>
+                    <td>{{scenario.beginMonth}}</td>
+                    <td>{{scenario.endMonth}}</td>
+                    <td>{{scenario.AM}}</td>
+                    <td>{{scenario.plannedSpend | formatCurrency}}</td>
+                    <td>{{scenario.revenue| formatCurrency}}</td>
+                    <td>{{scenario.ROI}}%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--end table view-->
+    <!--button bar-->
+    <div class="row">
+            <span class="btn btn-orange" ng-class="{'disabled':operation.disable}"
+                  ng-click="switchToView(key)"
+                  ng-repeat="(key,operation) in operations">{{key}}</span>
+    </div>
+</div>

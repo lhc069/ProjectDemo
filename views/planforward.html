@@ -1,0 +1,635 @@
+<div class="container-fluid" id="Initial Input" ng-if="nav.current==='Initial Input'">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#/">Home</a></li>
+            <li><a href="javascript:void(0)" ng-click="nav.current='Initial Input'">Plan Forward</a></li>
+            <li>Initial Input</li>
+        </ol>
+    </div>
+    <div class="row">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="planForwardBrand" class="col-xs-12 col-sm-2 control-label">Brand:</label>
+                <label class="col-xs-11 col-sm-4">
+                    <select id="planForwardBrand" class="form-control" ng-model="planForward.brand"
+                            ng-options="b for b in brands">
+                    </select>
+                </label>
+
+                <div class="col-xs-1 elp-info">
+                    <i class="fa fa-question-circle" tooltip-placement="right" tooltip="{{brandTooltips}}"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="planForwardAttribution" class="col-xs-12 col-sm-2 control-label">Attribution:</label>
+
+                <div class="col-xs-11 col-sm-4" id="planForwardAttribution">
+                    <label class="btn btn-default" ng-model="planForward.attribution" btn-radio="'LTA'" uncheckable>
+                        LTA
+                    </label>
+                    <label class="btn btn-default" ng-model="planForward.attribution" btn-radio="'MTA'" uncheckable>
+                        MTA
+                    </label>
+                </div>
+                <div class="col-xs-1 elp-info">
+                    <i class="fa fa-question-circle" tooltip-placement="right" tooltip="{{attrTooltips}}"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="planForwardBeginPeriod" class="col-xs-12 col-sm-2 control-label">Begin Period:</label>
+
+                <div class="col-xs-11 col-sm-4">
+                    <div class="input-group">
+                        <input id="planForwardBeginPeriod" type="text" class="form-control"
+                               datepicker-popup="{{format}}"
+                               ng-model="planForward.beginPeriod" is-open="opened.planForwardBeginPeriod"
+                               min-date="{{minDate}}"
+                               datepicker-options="dateOptions" datepicker-mode="'month'" ng-required="true"
+                               close-text="Close" disabled>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="open($event, 'planForwardBeginPeriod')">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-1 elp-info">
+                    <i class="fa fa-question-circle" tooltip-placement="right" tooltip="{{beginPeriodTooltips}}"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="planForwardEndPeriod" class="col-xs-12 col-sm-2 control-label">End Period:</label>
+
+                <div class="col-xs-11 col-sm-4">
+                    <div class="input-group">
+                        <input id="planForwardEndPeriod" type="text" class="form-control" datepicker-popup="{{format}}"
+                               ng-model="planForward.endPeriod" is-open="opened.planForwardEndPeriod"
+                               ng-change="getLastDate()"
+                               min-date="planForward.beginPeriod" datepicker-options="dateOptions" disabled
+                               datepicker-mode="'month'" ng-required="true" close-text="Close"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default"
+                                    ng-click="open($event, 'planForwardEndPeriod')">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-1 elp-info">
+                    <i class="fa fa-question-circle" tooltip-placement="right" tooltip="{{endPeriodTooltips}}"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="planForwardSpend" class="col-xs-12 col-sm-2 control-label">Portfolio Spend:</label>
+
+                <div class="col-xs-11 col-sm-4">
+                    <input class="form-control" id="planForwardSpend" type="text" ng-model="planForward.spend"
+                           ng-init="planForward.spend='5000000'" format-input autofocus>
+                </div>
+                <div class="col-xs-1 elp-info">
+                    <i class="fa fa-question-circle" tooltip-placement="right" tooltip="{{spendTooltips}}"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 col-xs-offset-0 col-sm-5 col-sm-offset-2">
+                    <button type="button" class="btn btn-default" ng-click="CInput()">Next
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid" id="Constraints Input" ng-if="nav.current==='Constraints Input'">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#/">Home</a></li>
+            <li><a href="javascript:void(0)" ng-click="nav.current='Initial Input'">Plan Forward</a></li>
+            <li><a href="javascript:void(0)" ng-click="nav.current='Initial Input'">Initial Input</a></li>
+            <li>Constraints Input</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 well well-sm">
+            <strong>Brand</strong>: {{planForward.brand}}
+            <strong>Attribution</strong>: {{planForward.attribution}}
+            <strong>Begin Period</strong>: {{planForward.beginPeriod | date: 'MMM-dd-yyyy'}}
+            <strong>End Period</strong>: {{planForward.endPeriod | date: 'MMM-dd-yyyy'}}
+            <strong>Portfolio Spend </strong>: {{planForward.spend | formatCurrency}}
+            <!--<strong>Data through</strong>: {{planForward.dataThrough | date: 'MMM-dd-yyyy'}}-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-condensed table-fix-width">
+                    <thead>
+                    <tr>
+                        <th class="tr-fix-width-label" rowspan="2" style="text-align:left">Portfolio Channels</th>
+                        <th class="tr-fix-width-label" rowspan="2">Select for Planning?</th>
+                        <th class="tr-fix-width-label" rowspan="2">Lower Bound</th>
+                        <th class="tr-fix-width-numx2" colspan="2">Spend Constraints</th>
+                        <th class="tr-fix-width-label" rowspan="2">Upper Bound</th>
+                        <!--<th rowspan="2">Scaling Factor</th>-->
+                    </tr>
+                    <tr>
+                        <th>Minimum</th>
+                        <th>Maximum</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="text-align:left">SEM</td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="planForward.selectPlan.semTotal"
+                                           ng-click="totCheck()">
+                                </label>
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.semLB =  (planForward.output.semBLB - 1) + (planForward.output.semCLB - 1) + (planForward.output.semPLB - 1) + (planForward.output.semOLB - 1) + 4">
+                            {{planForward.output.semLB | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputSemMin"></label>
+                                <input ng-model="planForward.input.semMin" id="planForwardInputSemMin" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.semLB}}"
+                                       max="{{planForward.output.semUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputSemMinRange"></label>
+                                <input ng-model="planForward.input.semMin" id="planForwardInputSemMinRange" type="range"
+                                       min="{{planForward.output.semLB}}" max="{{planForward.output.semUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputSemMax"></label>
+                                <input ng-model="planForward.input.semMax" id="planForwardInputSemMax" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.semLB}}"
+                                       max="{{planForward.output.semUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputSemMaxRange"></label>
+                                <input ng-model="planForward.input.semMax" id="planForwardInputSemMaxRange" type="range"
+                                       min="{{planForward.output.semLB}}" max="{{planForward.output.semUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.semUB =  (planForward.output.semBUB - 1) + (planForward.output.semCUB - 1) + (planForward.output.semPUB - 1) + (planForward.output.semOUB - 1) + 4">
+                            {{planForward.output.semUB | formatCurrency}}
+                        </td>
+
+                        <!--<td></td>-->
+                    </tr>
+
+                    <tr>
+                        <td style="text-align:left">Display</td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="planForward.selectPlan.display">
+                                </label>
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">{{planForward.output.disLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputDisMin"></label>
+                                <input ng-model="planForward.input.disMin" id="planForwardInputDisMin" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.disLB}}"
+                                       max="{{planForward.output.disUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputDisMinRange"></label>
+                                <input ng-model="planForward.input.disMin" id="planForwardInputDisMinRange" type="range"
+                                       min="{{planForward.output.disLB}}" max="{{planForward.output.disUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputDisMax"></label>
+                                <input ng-model="planForward.input.disMax" id="planForwardInputDisMax" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.disLB}}"
+                                       max="{{planForward.output.disUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputDisMaxRange"></label>
+                                <input ng-model="planForward.input.disMax" id="planForwardInputDisMaxRange" type="range"
+                                       min="{{planForward.output.disLB}}" max="{{planForward.output.disUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">{{planForward.output.disUB | formatCurrency}}</td>
+                        <!--<td></td>-->
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Social</td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="planForward.selectPlan.social">
+                                </label>
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">{{planForward.output.socLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputSocMin"></label>
+                                <input ng-model="planForward.input.socMin" id="planForwardInputSocMin" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.socLB}}"
+                                       max="{{planForward.output.socUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputSocMinRange"></label>
+                                <input ng-model="planForward.input.socMin" id="planForwardInputSocMinRange" type="range"
+                                       min="{{planForward.output.socLB}}" max="{{planForward.output.socUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputSocMax"></label>
+                                <input ng-model="planForward.input.socMax" id="planForwardInputSocMax" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.socLB}}"
+                                       max="{{planForward.output.socUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputSocMaxRange"></label>
+                                <input ng-model="planForward.input.socMax" id="planForwardInputSocMaxRange" type="range"
+                                       min="{{planForward.output.socLB}}" max="{{planForward.output.socUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">{{planForward.output.socUB | formatCurrency}}</td>
+                        <!--<td></td>-->
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Affiliates</td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="planForward.selectPlan.affiliates">
+                                </label>
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">{{planForward.output.affLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputAffMin"></label>
+                                <input ng-model="planForward.input.affMin" id="planForwardInputAffMin" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.affLB}}"
+                                       max="{{planForward.output.affUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputAffMinRange"></label>
+                                <input ng-model="planForward.input.affMin" id="planForwardInputAffMinRange" type="range"
+                                       min="{{planForward.output.affLB}}" max="{{planForward.output.affUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputAffMax"></label>
+                                <input ng-model="planForward.input.affMax" id="planForwardInputAffMax" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.affLB}}"
+                                       max="{{planForward.output.affUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputAffMaxRange"></label>
+                                <input ng-model="planForward.input.affMax" id="planForwardInputAffMaxRange" type="range"
+                                       min="{{planForward.output.affLB}}" max="{{planForward.output.affUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">{{planForward.output.affUB | formatCurrency}}</td>
+                        <!--<td></td>-->
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Partners</td>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="planForward.selectPlan.partners">
+                                </label>
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">{{planForward.output.parLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputParMin"></label>
+                                <input ng-model="planForward.input.parMin" id="planForwardInputParMin" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.parLB}}"
+                                       max="{{planForward.output.parUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputParMinRange"></label>
+                                <input ng-model="planForward.input.parMin" id="planForwardInputParMinRange" type="range"
+                                       min="{{planForward.output.parLB}}" max="{{planForward.output.parUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputParMax"></label>
+                                <input ng-model="planForward.input.parMax" id="planForwardInputParMax" type="text" style="text-align:right"
+                                       string-to-number class="form-control" min="{{planForward.output.parLB}}"
+                                       max="{{planForward.output.parUB}}" format-input>
+                                <label class="sr-only" for="planForwardInputParMaxRange"></label>
+                                <input ng-model="planForward.input.parMax" id="planForwardInputParMaxRange" type="range"
+                                       min="{{planForward.output.parLB}}" max="{{planForward.output.parUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num">{{planForward.output.parUB | formatCurrency}}</td>
+                        <!--<td></td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-hide="true">
+        <div class="col-sm-10 col-sm-offset-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Control Channels</th>
+                        <th ng-repeat="month in planForward.ControlChannels">{{month | date: 'MMM-dd-yyyy'}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>DM</td>
+                        <td ng-repeat="month in planForward.ControlChannels"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-hide="true">
+        <div class="col-sm-10 col-sm-offset-2">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-condensed">
+                    <tr>
+                        <th rowspan="2">TV</th>
+                        <th>Begin Date</th>
+                        <th>End Date</th>
+                        <th>Spend ($)</th>
+                        <th>Impressions</th>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-group form-horizontal">
+            <div class="col-xs-6 col-xs-offset-0 col-sm-2 col-sm-offset-2">
+                <button type="button" class="btn btn-default" ng-click="nav.current='Initial Input'">Prev</button>
+            </div>
+            <div class="col-xs-6 col-sm-2">
+                <button type="button" class="btn btn-default" ng-click="calculate()">Next</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid" id="Output" ng-if="nav.current==='Output'">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#/">Home</a></li>
+            <li><a href="javascript:void(0)" ng-click="nav.current='Initial Input'">Plan Forward</a></li>
+            <li><a href="javascript:void(0)" ng-click="nav.current='Initial Input'">Initial Input</a></li>
+            <li><a href="javascript:void(0)" ng-click="nav.current='Constraints Input'">Constraints Input</a></li>
+            <li>Output</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="well well-sm"><label>Scenario ID:</label>{{planForward.output.ScenarioID}}<br>
+            <strong>Brand</strong>: {{planForward.brand}}
+            <strong>Attribution</strong>: {{planForward.attribution}}
+            <strong>Begin Period</strong>: {{planForward.beginPeriod | date: 'MMM-dd-yyyy'}}
+            <strong>End Period</strong>: {{planForward.endPeriod | date: 'MMM-dd-yyyy'}}
+            <strong>Portfolio Spend </strong>: {{planForward.spend | formatCurrency}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="{{planforwardContentSize}}">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-condensed table-fix-width">
+                    <thead>
+                    <tr>
+                        <th class="tr-fix-width-label" rowspan="2"  style="text-align:left">Portfolio Channels</th>
+                        <th class="tr-fix-width-numx4" colspan="4">Input</th>
+                        <th class="tr-fix-width-numx2" colspan="2">Optimized</th>
+                        <th class="tr-fix-width-numx2" colspan="2">What-if</th>
+                        <th class="tr-fix-width-numx2" colspan="2">Difference</th>
+                    </tr>
+                    <tr>
+                        <th>Lower</th>
+                        <th>Min</th>
+                        <th>Max</th>
+                        <th>Upper</th>
+                        <th>Spend</th>
+                        <th>Revenue</th>
+                        <th>Spend</th>
+                        <th>Revenue</th>
+                        <th>Spend</th>
+                        <th>Revenue</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="text-align:left">SEM</td>
+                        <td class="td-fix-width-num">{{planForward.output.semLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.semMin | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.semMax | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.semUB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.semSR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.semPR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputSemAS"></label>
+                                <input id="planForwardInputSemAS" type="text" style="text-align:right" string-to-number
+                                       ng-model="planForward.input.semAS" class="form-control"
+                                       min="{{planForward.output.semLB}}" max="{{planForward.output.semUB}}"
+                                       format-input>
+                                <label class="sr-only" for="planForwardInputSemASRange"></label>
+                                <input ng-model="planForward.input.semAS" id="planForwardInputSemASRange" type="range"
+                                       min="{{planForward.output.semLB}}" max="{{planForward.output.semUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.semAR">
+                            {{planForward.output.semAR | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.semSD">
+                            {{planForward.output.semSD | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.semRD">
+                            {{planForward.output.semRD | formatCurrency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Display</td>
+                        <td class="td-fix-width-num">{{planForward.output.disLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.disMin | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.disMax | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.disUB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.disSR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.disPR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputDisAS"></label>
+                                <input id="planForwardInputDisAS" type="text" style="text-align:right" string-to-number
+                                       ng-model="planForward.input.disAS" class="form-control"
+                                       min="{{planForward.output.disLB}}" max="{{planForward.output.disUB}}"
+                                       format-input>
+                                <label class="sr-only" for="planForwardInputDisASRange"></label>
+                                <input ng-model="planForward.input.disAS" id="planForwardInputDisASRange" type="range"
+                                       min="{{planForward.output.disLB}}" max="{{planForward.output.disUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.disAR">
+                            {{planForward.output.disAR | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.disSD">
+                            {{planForward.output.disSD | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.disRD">
+                            {{planForward.output.disRD | formatCurrency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Social</td>
+                        <td class="td-fix-width-num">{{planForward.output.socLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.socMin | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.socMax | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.socUB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.socSR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.socPR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputSocAS"></label>
+                                <input id="planForwardInputSocAS" type="text" style="text-align:right" string-to-number
+                                       ng-model="planForward.input.socAS" class="form-control"
+                                       min="{{planForward.output.socLB}}" max="{{planForward.output.socUB}}"
+                                       format-input>
+                                <label class="sr-only" for="planForwardInputSocASRange"></label>
+                                <input ng-model="planForward.input.socAS" id="planForwardInputSocASRange" type="range"
+                                       min="{{planForward.output.socLB}}" max="{{planForward.output.socUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.socAR">
+                            {{planForward.output.socAR | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.socSD">
+                            {{planForward.output.socSD | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.socRD">
+                            {{planForward.output.socRD | formatCurrency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Affiliates</td>
+                        <td class="td-fix-width-num">{{planForward.output.affLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.affMin | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.affMax | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.affUB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.affSR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.affPR | formatCurrency}}</td>
+                        <td>
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputAffAS"></label>
+                                <input id="planForwardInputAffAS" type="text" style="text-align:right" string-to-number
+                                       ng-model="planForward.input.affAS" class="form-control"
+                                       min="{{planForward.output.affLB}}" max="{{planForward.output.affUB}}"
+                                       format-input>
+                                <label class="sr-only" for="planForwardInputAffASRange"></label>
+                                <input ng-model="planForward.input.affAS" id="planForwardInputAffASRange" type="range"
+                                       min="{{planForward.output.affLB}}" max="{{planForward.output.affUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.affAR">
+                            {{planForward.output.affAR | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.affSD">
+                            {{planForward.output.affSD | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.affRD">
+                            {{planForward.output.affRD | formatCurrency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Partners</td>
+                        <td class="td-fix-width-num">{{planForward.output.parLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.parMin | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.input.parMax | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.parUB | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.parSR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">{{planForward.output.parPR | formatCurrency}}</td>
+                        <td class="td-fix-width-num">
+                            <div class="form-group-sm">
+                                <label class="sr-only" for="planForwardInputParAS"></label>
+                                <input id="planForwardInputParAS" type="text" style="text-align:right" string-to-number
+                                       ng-model="planForward.input.parAS" class="form-control"
+                                       min="{{planForward.output.parLB}}" max="{{planForward.output.parUB}}"
+                                       format-input>
+                                <label class="sr-only" for="planForwardInputParASRange"></label>
+                                <input ng-model="planForward.input.parAS" id="planForwardInputParASRange" type="range"
+                                       min="{{planForward.output.parLB}}" max="{{planForward.output.parUB}}">
+                            </div>
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.parAR">
+                            {{planForward.output.parAR | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.parSD">
+                            {{planForward.output.parSD | formatCurrency}}
+                        </td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.parRD">
+                            {{planForward.output.parRD | formatCurrency}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Portfolio Total</td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.totLB = (planForward.output.semLB - 1) + (planForward.output.disLB - 1) + (planForward.output.socLB - 1) + (planForward.output.affLB - 1) + (planForward.output.parLB - 1) + 5">{{planForward.output.totLB | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.input.totMin = (planForward.input.semMin - 1) + (planForward.input.disMin - 1) + (planForward.input.socMin - 1) + (planForward.input.affMin - 1) + (planForward.output.parMin - 1) + 5">{{planForward.input.totMin | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.input.totMax = (planForward.input.semMax - 1) + (planForward.input.disMax - 1) + (planForward.input.socMax - 1) + (planForward.input.affMax - 1) + (planForward.output.parMax - 1) + 5">{{planForward.input.totMax | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.totUB = (planForward.output.semUB - 1) + (planForward.output.disUB - 1) + (planForward.output.socUB - 1) + (planForward.output.affUB - 1) + (planForward.output.parUB - 1) + 5">{{planForward.output.totUB | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.totSR">{{planForward.output.totSR | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.totPR">{{planForward.output.totPR | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.input.totAS">{{planForward.input.totAS | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.totAR">{{planForward.output.totAR | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.totSD">{{planForward.output.totSD | formatCurrency}}</td>
+                        <td class="td-fix-width-num" ng-model="planForward.output.totRD">{{planForward.output.totRD | formatCurrency}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left">Portfolio ROI</td>
+                        <td colspan="4"></td>
+                        <td class="td-fix-width-num" colspan="2" ng-model="planForward.output.actualROI">{{planForward.output.actualROI}}%</td>
+                        <td class="td-fix-width-num" colspan="2" ng-model="planForward.output.optimizedROI">{{planForward.output.optimizedROI}}%</td>
+                        <td class="td-fix-width-num" colspan="2" ng-model="planForward.output.differenceROI">{{planForward.output.differenceROI}}%</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-sm-4" ng-show="showme">
+            <br/>
+            <h4 style="text-align:center">Spend Difference between optimized and what-if</h4>
+            <compare-chart></compare-chart>
+            <h4 style="text-align:center">(-)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(+)</h4>
+        </div>
+
+    </div>
+    <div class="row" style="min-height: 130px">
+        <div class="col-sm-11 col-sm-offset-1">
+            <div class="col-sm-3">
+                <div class="btn-group" dropdown>
+                    <button type="button" class="btn btn-default" ng-click="">Save</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="javascript:void(0)" ng-click="">Export</a></li>
+                        <li><a href="javascript:void(0)" ng-click="">Share</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-default" ng-click="reRun()">Re-run</button>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-default" ng-click="reset()">Reset</button>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-default" ng-click="toggle()">{{showGraph}}</button>
+            </div>
+        </div>
+    </div>
+</div>
